@@ -1,0 +1,31 @@
+version: '3'
+services:
+  hello_world_web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hello_world_web
+    environment:
+      DJANGO_POSTGRES_HOST: hello_world_db
+      DJANGO_POSTGRES_PORT: 5432
+    image: result/latest
+    ports:
+      - "8000:8000"
+    entrypoint: ./entrypoint.sh
+    depends_on:
+      - hello_world_db
+
+  hello_world_db:
+    image: postgres
+    container_name: hello_world_db
+    environment:
+      POSTGRES_USER: db_user
+      POSTGRES_PASSWORD: passw0rd
+      POSTGRES_DB: poll_db
+    volumes:
+      - poll-data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+
+volumes:
+  poll-data:

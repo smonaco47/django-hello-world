@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'hello_world.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'poll_db',
+        'USER': 'db_user',
+        'PASSWORD': 'passw0rd',
+        'HOST': 'hello_world_db',
+        'PORT': '5432',
     }
 }
 
